@@ -33,7 +33,7 @@ export const metadata = {
   },
   openGraph: {
     title: "Ayun’s Birthday 🎉",
-    description: "Kamu diundang ke ulang tahun Ayun!",
+    // description: "Kamu diundang ke ulang tahun Ayun!",
     images: [
       {
         url: "https://ayuns-birthday.vercel.app/og-image.png",
