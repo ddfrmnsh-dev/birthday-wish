@@ -49,7 +49,7 @@ export default function LoginScreen({
                 body: JSON.stringify({
                     name: "ayuuunnss",
                     status: "sudah login",
-                    time: new Date().toISOString(),
+                    time: new Date().toLocaleString("id-ID", { timeZone: "Asia/Jakarta" })
                 }),
             });
 

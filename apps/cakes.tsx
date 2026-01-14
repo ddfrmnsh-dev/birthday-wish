@@ -51,7 +51,7 @@ export default function CakesApp() {
             body: JSON.stringify({
                 name: "ayuuunnss",
                 text: wish,
-                time: new Date().toISOString(),
+                time: new Date().toLocaleString("id-ID", { timeZone: "Asia/Jakarta" })
             }),
         });
     };
