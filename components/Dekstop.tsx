@@ -68,7 +68,7 @@ export default function Dekstop() {
 
                                 {/* LABEL */}
                                 <span className="text-[11px] leading-none opacity-80 text-center">
-                                    {key}.exe
+                                    {key}.app
                                 </span>
                             </button>
                         );

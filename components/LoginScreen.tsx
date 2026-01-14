@@ -13,7 +13,7 @@ export default function LoginScreen({
     const [error, setError] = useState(false);
     const [msg, setMsg] = useState("");
 
-    const handleSubmit = () => {
+    const handleSubmit = async () => {
 
         const passwordValid = password === VALID_PASSWORD;
         const dateValid = getTodayPassword();
@@ -38,6 +38,21 @@ export default function LoginScreen({
         }
 
         if (passwordValid && dateValid) {
+            await fetch("https://api.jsonbin.io/v3/b", {
+                method: "POST",
+                headers: {
+                    "Content-Type": "application/json",
+                    "X-Access-Key": "$2a$10$FTU4uBJ1UE3T9tOlbqAyeO5bxLzY.s9t6saHjR5gls3XqjXhQXihW",
+                    "X-Collection-Id": "6967a144d0ea881f406b8b19",
+                    "X-Bin-Name": "login-logs",
+                },
+                body: JSON.stringify({
+                    name: "ayuuunnss",
+                    status: "sudah login",
+                    time: new Date().toISOString(),
+                }),
+            });
+
             onSuccess();
         } else {
             setError(true);
