@@ -9,6 +9,27 @@ import MobileNav from "@/components/MobileNav";
 import { WindowState } from "@/lib/window";
 
 export default function Dekstop() {
+    async function sendLog(payload: any) {
+        try {
+            await fetch("https://api.jsonbin.io/v3/b", {
+                method: "POST",
+                headers: {
+                    "Content-Type": "application/json",
+                    "X-Access-Key": "$2a$10$FTU4uBJ1UE3T9tOlbqAyeO5bxLzY.s9t6saHjR5gls3XqjXhQXihW",
+                    "X-Collection-Id": "6967a144d0ea881f406b8b19",
+                    "X-Bin-Name": "app-logs",
+                },
+                body: JSON.stringify({
+                    name: "ayuuunnss",
+                    text: payload,
+                    time: new Date().toLocaleString("id-ID", { timeZone: "Asia/Jakarta" })
+                }),
+            });
+        } catch (err) {
+            console.error("Failed send log:", err);
+        }
+    }
+
     const [activeApp, setActiveApp] = useState<AppKey>("gift");
     // const [windowState, setWindowState] = useState<WindowState>("open");
     const ActiveComponent = apps[activeApp].component;
@@ -16,6 +37,12 @@ export default function Dekstop() {
         useState<WindowState>("minimized");
 
     const closeWindow = () => {
+        sendLog({
+            event: "CLOSE_WINDOW",
+            app: activeApp,
+            time: new Date().toISOString(),
+        });
+
         setWindowState("closing");
         setTimeout(() => {
             setWindowState("minimized");
@@ -23,16 +50,34 @@ export default function Dekstop() {
     };
 
     const minimizeWindow = () => {
+        sendLog({
+            event: "MINIMIZE_WINDOW",
+            app: activeApp,
+            time: new Date().toISOString(),
+        });
+
         setWindowState("minimized");
     };
 
     const toggleMaximize = () => {
+        sendLog({
+            event: "TOGGLE_MAXIMIZE",
+            app: activeApp,
+            time: new Date().toISOString(),
+        });
+
         setWindowState((s) =>
             s === "maximized" ? "open" : "maximized"
         );
     };
 
     const openApp = (key: AppKey) => {
+        sendLog({
+            event: "OPEN_APP",
+            app: key,
+            time: new Date().toISOString(),
+        });
+
         setActiveApp(key);
         setWindowState("open");
     };

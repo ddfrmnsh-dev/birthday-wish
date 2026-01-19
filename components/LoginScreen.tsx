@@ -2,8 +2,7 @@
 import { useState } from "react";
 import { getTodayPassword, isToday21012026 } from "@/lib/datePassword";
 
-// const VALID_PASSWORD = "21012026";
-const VALID_PASSWORD = "22122025";
+const VALID_PASSWORD = "21012026";
 export default function LoginScreen({
     onSuccess,
 }: {
@@ -16,23 +15,43 @@ export default function LoginScreen({
     const handleSubmit = async () => {
 
         const passwordValid = password === VALID_PASSWORD;
-        const dateValid = getTodayPassword();
-        // const dateValid = isToday21012026();
+        const dateValid = isToday21012026();
 
-        if (password !== "22122025") {
+        if (!passwordValid) {
+            await fetch("https://api.jsonbin.io/v3/b", {
+                method: "POST",
+                headers: {
+                    "Content-Type": "application/json",
+                    "X-Access-Key": "$2a$10$FTU4uBJ1UE3T9tOlbqAyeO5bxLzY.s9t6saHjR5gls3XqjXhQXihW",
+                    "X-Collection-Id": "6967a144d0ea881f406b8b19",
+                    "X-Bin-Name": "login-logs",
+                },
+                body: JSON.stringify({
+                    name: "ayuuunnss",
+                    status: "gagal login pwd",
+                    time: new Date().toLocaleString("id-ID", { timeZone: "Asia/Jakarta" })
+                }),
+            });
+
             setMsg("Wrong password");
             return;
         }
-        // if (password !== "21012026") {
-        //     setMsg("Wrong password");
-        //     return;
-        // }
 
-        // if (!isToday21012026()) {
-        //     setMsg("This password is not valid today");
-        //     return;
-        // }
-        if (!getTodayPassword()) {
+        if (!dateValid) {
+            await fetch("https://api.jsonbin.io/v3/b", {
+                method: "POST",
+                headers: {
+                    "Content-Type": "application/json",
+                    "X-Access-Key": "$2a$10$FTU4uBJ1UE3T9tOlbqAyeO5bxLzY.s9t6saHjR5gls3XqjXhQXihW",
+                    "X-Collection-Id": "6967a144d0ea881f406b8b19",
+                    "X-Bin-Name": "login-logs",
+                },
+                body: JSON.stringify({
+                    name: "ayuuunnss",
+                    status: "gagal login date",
+                    time: new Date().toLocaleString("id-ID", { timeZone: "Asia/Jakarta" })
+                }),
+            });
             setMsg("This password is not valid today");
             return;
         }
@@ -174,8 +193,10 @@ export default function LoginScreen({
 
                 <p className="mt-4 text-xs opacity-50">
                     Hint: Password is 8 digits of your birthdate, e.g: 01012026
+                    <br />
+                    <br />
+                    <p className="font-bold text-center text-red-400">ONLY AYU TO SEE THE CONTENT!!</p>
                 </p>
-
                 <button
                     onClick={handleSubmit}
                     className="mt-4 text-xs opacity-70 hover:opacity-100"
