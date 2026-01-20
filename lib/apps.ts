@@ -1,6 +1,7 @@
 import CakesApp from "@/apps/cakes";
 import GaleryApp from "@/apps/galery";
 import GiftApp from "@/apps/gift";
+import MailApp from "@/apps/mail";
 import MusicApp from "@/apps/music";
 import YappinngApp from "@/apps/yapping";
 
@@ -29,6 +30,11 @@ export const apps = {
         title: "Yapping",
         component: YappinngApp,
         icon: "📣",
+    },
+    mail: {
+        title: "Mail",
+        component: MailApp,
+        icon: "📧",
     },
 };
 
