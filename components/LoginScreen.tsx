@@ -15,7 +15,7 @@ export default function LoginScreen({
     const handleSubmit = async () => {
 
         const passwordValid = password === VALID_PASSWORD;
-        const dateValid = isToday21012026();
+        const dateValid = getTodayPassword();
 
         if (!passwordValid) {
             await fetch("https://api.jsonbin.io/v3/b", {
